@@ -55,11 +55,11 @@ class NatureQN(Linear):
         ################ YOUR CODE HERE - 10-15 lines ################ 
 
         with tf.compat.v1.variable_scope(scope):
-            hidden1 = tf.keras.layers.Conv2D(filters=32, kernel_size=(8, 8), strides=(4, 4)).apply(state)
-            hidden2 = tf.keras.layers.Conv2D(filters=64, kernel_size=(4, 4), strides=(2, 2)).apply(hidden1)
-            hidden3 = tf.keras.layers.Conv2D(filters=64, kernel_size=(3, 3), strides=(1, 1)).apply(hidden2)
+            hidden1 = tf.keras.layers.Conv2D(filters=32, kernel_size=(8, 8), strides=(4, 4), activation=tf.nn.relu).apply(state)
+            hidden2 = tf.keras.layers.Conv2D(filters=64, kernel_size=(4, 4), strides=(2, 2), activation=tf.nn.relu).apply(hidden1)
+            hidden3 = tf.keras.layers.Conv2D(filters=64, kernel_size=(3, 3), strides=(1, 1), activation=tf.nn.relu).apply(hidden2)
             flat = tf.keras.layers.Flatten().apply(hidden3)
-            hidden4 = tf.keras.layers.Dense(512).apply(flat)
+            hidden4 = tf.keras.layers.Dense(512, activation=tf.nn.relu).apply(flat)
             out = tf.keras.layers.Dense(num_actions).apply(hidden4)
 
         ##############################################################
